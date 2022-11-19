@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
+./**/__pycache__/
 
 # python env.
 .flask_env/
