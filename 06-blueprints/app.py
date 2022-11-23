@@ -1,11 +1,10 @@
-from flask import Flask, request, Blueprint
-from db import products
-import uuid
+from flask import Flask
 from products.routes import product_bp
 from reviews.routes import reviews_bp
 
 app = Flask(__name__)
 
+# Register blueprints with app
 app.register_blueprint(product_bp)
 app.register_blueprint(reviews_bp)
 

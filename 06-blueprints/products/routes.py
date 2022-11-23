@@ -1,11 +1,13 @@
-from flask_smorest import Blueprint, abort
+from flask_smorest import Blueprint
 from flask.views import MethodView
 from flask import request
 from db import products
 import uuid
 
+# Create Blueprint
 product_bp = Blueprint("products_blueprint", __name__, description="products bp")
 
+# Associate routes with blueprint
 @product_bp.route("/products/<string:product_id>")
 class Product(MethodView):
   def get(self, product_id):
