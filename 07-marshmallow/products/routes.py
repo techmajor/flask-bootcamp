@@ -9,6 +9,7 @@ product_bp = Blueprint("products_blueprint", __name__, description="products bp"
 
 @product_bp.route("/products/<string:product_id>")
 class Product(MethodView):
+  @product_bp.arguments(ProductSchema)
   def get(self, product_id):
     try:
       return products[product_id]
