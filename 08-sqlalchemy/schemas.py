@@ -9,6 +9,11 @@ class ReviewSchema(Schema):
   # id = fields.Str(dump_only=True)
   product_id = fields.Str(required=True)
   review_text = fields.Str(required=True)
+
+class EditReviewSchema(Schema):
+  id = fields.Int(dump_only = True)
+  review_text = fields.Str(required=True)
+  product_id = fields.Int(dump_only=True)
   
 class ProductRatingSchema(Schema):
   rating = fields.Int(required=True)

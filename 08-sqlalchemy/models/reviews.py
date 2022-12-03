@@ -6,3 +6,9 @@ class ReviewModel(db.Model):
   review_text = db.Column(db.String(200), nullable=False)
   product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
   product = db.relationship("ProductModel", back_populates="reviews")
+  
+  def getDict(self):
+    return { "id": self.id,
+            "review_text": self.review_text,
+            "product_id": self.product_id
+            }
