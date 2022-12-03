@@ -7,5 +7,7 @@ class ProductModel(db.Model):
   price = db.Column(db.Integer, nullable=False)
   reviews = db.relationship("ReviewModel", back_populates="product")
   
+  tags = db.relationship("TagModel", back_populates="products", secondary="products_tags")
+  
   def getDict(self):
     return {"id": self.id, "name": self.name, "price": self.price}

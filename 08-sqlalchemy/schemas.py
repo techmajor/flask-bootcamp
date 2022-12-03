@@ -24,3 +24,14 @@ class RatingsResponseSchema(Schema):
 
 class ProductListSchema(Schema):
   products = fields.List(fields.Nested(ProductSchema))
+  
+class TagSchema(Schema):
+  id = fields.Int(dump_only=True)
+  name = fields.Str(required=True)
+  products = fields.List(fields.Nested(ProductSchema), dump_only=True)
+
+class Product2TagSchema(Schema):
+  product_id = fields.Int(required=True)
+  
+class ErrorSchema(Schema):
+  message = fields.Str(dump_only=True)

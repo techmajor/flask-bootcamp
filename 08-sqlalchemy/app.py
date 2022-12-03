@@ -3,6 +3,7 @@ from db import db
 import uuid
 from resources.products.routes import product_bp
 from resources.reviews.routes import reviews_bp
+from resources.tags.routes import tags_bp
 from flask_sqlalchemy import SQLAlchemy
 
 # specify database configurations
@@ -28,6 +29,7 @@ def create_app():
   # Register blueprints
   app.register_blueprint(product_bp)
   app.register_blueprint(reviews_bp)
+  app.register_blueprint(tags_bp)
   
   # Configure SQLAlchemy
   app.config['SQLALCHEMY_DATABASE_URI'] = connection_str
@@ -38,6 +40,8 @@ def create_app():
   # import all models and then create_all()
   from models.products import ProductModel
   from models.reviews import ReviewModel
+  from models.tags import TagModel
+  from models.products_tags import ProductTagModel
 
   with app.app_context():
       db.create_all()
