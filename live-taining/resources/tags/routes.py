@@ -41,7 +41,7 @@ class TagListView(MethodView):
   # 6. Get all tags
   def get(self):
     try:
-      tags = TagModel.query.order_by(TagModel.name).all()
+      tags = TagModel.query.order_by(TagModel.name).all() 
       return [tag.getDict() for tag in tags]
     except SQLAlchemyError as e:
       return {"message": str(e)}, 401
