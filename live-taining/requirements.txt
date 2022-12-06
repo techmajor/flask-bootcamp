@@ -1,0 +1,5 @@
+flask
+flask_smorest
+marshmallow
+flask-sqlalchemy
+pymysql
