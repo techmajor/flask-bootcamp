@@ -1,0 +1,29 @@
+1. Install flask-jwt-extended and passlib (add to requirements.txt)
+  - https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
+2. In app.py
+  - import JWTManager
+    - from flask_jwt_extended import JWTManager
+  - Initialize JWTManager with app
+    - app.config["JWT_SECRET_KEY"] = "your-secret-key"
+    - jwt = JWTManager(app)
+3. Create User model. In models/users.py
+4. User register API. In resources/users/routes.py
+  - Hash password using pbkdf2_sha256.hash 
+    - password=pbkdf2_sha256.hash(request_data["password"])
+  - Store the hashed password in the db.
+  - DO NOT store password in plain text
+5. User Login. In resources/users/routes.py
+  - Verify password using pbkdf2_sha256.verify
+    - pbkdf2_sha256.verify(request_data["password"], user.password)
+  - Generate Access token
+    - access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=15))
+      - Store user.id as identity in the token.
+      - can set expiry time using expires_delta=timedelta()
+  - Return access token
+6. If required, override JWT methods. Ref app.py
+7. If required, set additional_claims (can be used to set some props of the user, like is_admin). Ref app.py
+8. Protect end points with @jwt_required(). Ref resources/products/routes
+9. In method views, the JWT user and the additional claims can be accessed using get_jwt(). Ref resources/products/routes
+  - jwt = get_jwt()
+
+
