@@ -1,0 +1,15 @@
+1. Add flask-migrate
+2. In app.py
+  # 10-migrate-db
+  migrate = Migrate(app, db)
+  # Make sure db.create_all() is commented out (or removed). From now on, alembic will take care of creating tables as well.
+3. Run command 'flask db init'
+  - This initializes the migration. Check migrations folder.
+4. Change model(s)
+  Ex: In models/tags.py change the length of the 'name' string.
+5. Run command 'flask db migrate'
+  - This creates a new version in the migrations folder.
+  - check the upgrade() and downgrade() functions.
+6. Run command 'flask db upgrade'
+  - This upgrades the db with the latest changes in model
+7. 'flask db downgrade' is also available.
