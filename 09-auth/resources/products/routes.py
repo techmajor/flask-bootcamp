@@ -11,6 +11,7 @@ from ..utils import row2dict
 # 09-auth
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt
+from flask_jwt_extended import current_user
 
 product_bp = Blueprint("products_blueprint", __name__, description="products bp")
 
@@ -28,6 +29,7 @@ class Product(MethodView):
       return {"message": "Product not found"}, 404
   
   @product_bp.arguments(ProductSchema)
+  @jwt_required()
   def put(self,request_data, product_id):
     try:
       # request_data = request.get_json()
@@ -91,6 +93,7 @@ class ProductList(MethodView):
       jwt = get_jwt()
       print(jwt)
       print(jwt["is_admin"])
+      print(current_user.username)
         
       # pm = ProductModel(name=request_data["name"], price=request_data["price"])
       pm = ProductModel(**request_data)

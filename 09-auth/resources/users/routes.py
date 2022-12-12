@@ -8,8 +8,10 @@ from models.users import UserModel
 # 09-auth
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
+from flask_jwt_extended import get_jwt
 from datetime import timedelta
 from passlib.hash import pbkdf2_sha256
+from resources.users.blocklist import Blocklist
 
 users_bp = Blueprint("Users Blueprint", __name__, description="Users bp")
 
@@ -54,6 +56,15 @@ class UserLogin(MethodView):
         UserModel.username == request_data["username"]
       ).first()
     if user and pbkdf2_sha256.verify(request_data["password"], user.password):
-      access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=15))
+      access_token = create_access_token(identity=user, expires_delta=timedelta(minutes=15))
       return {"access_token": access_token}, 200
     return {"message": "Invalid credentials"}
+
+@users_bp.route("/users/logout")
+class UserLogout(MethodView):
+  @jwt_required()
+  def post(self):
+    jti = get_jwt()["jti"]
+    Blocklist.add(jti)
+    return {"message": "Logout successful"}
+    

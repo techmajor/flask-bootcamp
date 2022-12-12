@@ -25,5 +25,11 @@
 8. Protect end points with @jwt_required(). Ref resources/products/routes
 9. In method views, the JWT user and the additional claims can be accessed using get_jwt(). Ref resources/products/routes
   - jwt = get_jwt()
+10. Using the current_user import, the logged in user can be directly accessed as 'current_user'
+  - Override @jwt.user_identity_loader and @jwt.user_lookup_loader. Ref app.py
+  - While creating access_token, pass UserModel object instead of user.id
+    - access_token = create_access_token(identity=user, expires_delta=timedelta(minutes=15))
+  - import current_user and use. Ref resources/products/routes.py
+
 
 
