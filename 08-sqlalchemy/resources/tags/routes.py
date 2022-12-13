@@ -68,4 +68,13 @@ class TagProductView(MethodView):
       return [p.getDict() for p in tag.products], 201
     except SQLAlchemyError as e:
       return {"message": str(e)}, 500
+  
+  def delete(self, tag_id):
+    try:
+      tag = TagModel.query.get_or_404(tag_id)
+      db.session.delete(tag)
+      db.session.commit()
+      return {"message": "Tag deleted"}, 200
+    except SQLAlchemyError as e:
+      return {"message": str(e)}, 500
     

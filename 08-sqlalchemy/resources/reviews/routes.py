@@ -46,8 +46,9 @@ class ReviewList(MethodView):
     reviews_list = []
     for review in reviews:
       r = review.getDict()
-      print(review.product.name)
-      r.update({"name": review.product.name})
+      # print(review.product.name)
+      if review.product:
+        r.update({"name": review.product.name})
       reviews_list.append(r)
       
     # return [review.getDict() for review in reviews], 200
