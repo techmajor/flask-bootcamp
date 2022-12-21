@@ -1,0 +1,13 @@
+1. pip install requests
+2. Making an API call - requests.method (method can be get, post, put, etc). Examples:
+  - response = requests.get(config['base-url']+"/products")
+  - response = requests.post(config["base-url"]+"/users/login", json={"username": username, "password": password})
+3. Check if response is ok
+  - if (response.ok):
+4. if the response is json
+  - data = response.json()
+5. If response is NOT ok, response.reason will have the error message
+  - print(response.reason)
+6. In requests.post(), use json= (instead of data=) if the content type is json.
+7. To pass the JWT Auth token, set the Authorization header as follows:
+  - headers={'Authorization': "Bearer " + access_token}
