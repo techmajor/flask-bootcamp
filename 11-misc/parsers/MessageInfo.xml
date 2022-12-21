@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <to> subscriber@xyz.com </to>
+  <from> newsletter-author@abc.com</from>
+  <heading> News Letter </heading>
+  <body> This week's newsletter </body>
+</note>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grade>
+    <person id="1">
+        <name> Surabhi 
+            <firstname> Surabhi </firstname>
+            <lastname> Sumanth </lastname>
+        </name>
+        <age> 10 </age>
+        <dob> 23Jul2018 </dob>
+        <height> 120 </height>
+        <weight> 25 </weight>
+    </person>
+    <person id="2">
+        <name> Saanvi 
+            <firstname> Saanvi </firstname>
+            <lastname> Jajur </lastname>
+        </name>
+        <age> 8 </age>
+        <dob> 08May2014 </dob>
+        <height> 123 </height>
+        <weight> 24 </weight>
+    </person>
+</grade>
