@@ -1,35 +1,9 @@
-1. Install flask-jwt-extended and passlib (add to requirements.txt)
-  - https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
-2. In app.py
-  - import JWTManager
-    - from flask_jwt_extended import JWTManager
-  - Initialize JWTManager with app
-    - app.config["JWT_SECRET_KEY"] = "your-secret-key"
-    - jwt = JWTManager(app)
-3. Create User model. In models/users.py
-4. User register API. In resources/users/routes.py
-  - Hash password using pbkdf2_sha256.hash 
-    - password=pbkdf2_sha256.hash(request_data["password"])
-  - Store the hashed password in the db.
-  - DO NOT store password in plain text
-5. User Login. In resources/users/routes.py
-  - Verify password using pbkdf2_sha256.verify
-    - pbkdf2_sha256.verify(request_data["password"], user.password)
-  - Generate Access token
-    - access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=15))
-      - Store user.id as identity in the token.
-      - can set expiry time using expires_delta=timedelta()
-  - Return access token
-6. If required, override JWT methods. Ref app.py
-7. If required, set additional_claims (can be used to set some props of the user, like is_admin). Ref app.py
-8. Protect end points with @jwt_required(). Ref resources/products/routes
-9. In method views, the JWT user and the additional claims can be accessed using get_jwt(). Ref resources/products/routes
-  - jwt = get_jwt()
-10. Using the current_user import, the logged in user can be directly accessed as 'current_user'
-  - Override @jwt.user_identity_loader and @jwt.user_lookup_loader. Ref app.py
-  - While creating access_token, pass UserModel object instead of user.id
-    - access_token = create_access_token(identity=user, expires_delta=timedelta(minutes=15))
-  - import current_user and use. Ref resources/products/routes.py
-
-
-
+1. from flask import request, make_response
+2. Flask provides a method called make_response() that we can use to send custom headers, as well as change the property (like status_code, mimetype, etc.) in response.
+3. Create a make_response object
+  - r = make_response(ret)
+4. Set headers, status_code, etc
+  - r.status_code=200
+    r.mimetype="application/xml"
+    r.headers["Content-Type"] = "text/xml; charset=utf-8"
+5. return r
